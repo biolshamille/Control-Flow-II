@@ -1,0 +1,79 @@
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner input = new Scanner(System.in);
+
+        int[][] inventory = {
+            {12, 8, -1},
+            {15, 20, 10},
+            {6, -1, 14}
+        };
+
+        int totalItems = 0;
+
+        System.out.println("=== WAREHOUSE INVENTORY ===");
+
+        for (int row = 0; row < inventory.length; row++) {
+            for (int column = 0; column < inventory[row].length; column++) {
+                if (inventory[row][column] == -1) {
+                    continue;
+                }
+
+                totalItems += inventory[row][column];
+            }
+        }
+
+        System.out.println("Total available items: " + totalItems);
+
+        int rowChoice;
+
+        while (true) {
+            System.out.print("Enter shelf row (1-3, 0 to exit): ");
+            rowChoice = input.nextInt();
+
+            if (rowChoice == 0) {
+                break;
+            }
+
+            if (rowChoice < 1 || rowChoice > 3) {
+                System.out.println("Invalid row. Try again.");
+                continue;
+            }
+
+            int columnChoice;
+
+            System.out.print("Enter shelf column (1-3): ");
+            columnChoice = input.nextInt();
+
+            if (columnChoice < 1 || columnChoice > 3) {
+                System.out.println("Invalid column. Try again.");
+                continue;
+            }
+
+            if (inventory[rowChoice - 1][columnChoice - 1] == -1) {
+                System.out.println("This shelf is damaged.");
+                continue;
+            }
+
+            System.out.println("Items on shelf: "
+                    + inventory[rowChoice - 1][columnChoice - 1]);
+
+            System.out.print("Enter restock quantity: ");
+            int restock = input.nextInt();
+
+            if (restock < 0) {
+                System.out.println("Invalid quantity.");
+                continue;
+            }
+
+            inventory[rowChoice - 1][columnChoice - 1] += restock;
+
+            System.out.println("Updated shelf quantity: "
+                    + inventory[rowChoice - 1][columnChoice - 1]);
+        }
+
+        System.out.println("Inventory scanner closed.");
+        input.close();
+    }
+}

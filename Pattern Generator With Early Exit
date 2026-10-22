@@ -1,0 +1,23 @@
+public class Main {
+    public static void main(String[] args) {
+        int size = 5;
+
+        System.out.println("=== PATTERN GENERATOR ===");
+
+        for (int row = 1; row <= size; row++) {
+            if (row == 4) {
+                continue;
+            }
+
+            for (int column = 1; column <= row; column++) {
+                if (row == 5 && column == 3) {
+                    break;
+                }
+
+                System.out.print("* ");
+            }
+
+            System.out.println();
+        }
+    }
+}
